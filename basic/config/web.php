@@ -36,9 +36,27 @@ $config = [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
+//                [
+//                    'class' => 'yii\log\FileTarget',
+//                    'levels' => ['error', 'warning'],
+//                ],
                 [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    // 日志处理类
+                    'class' => 'net263\log\KafkaTarget',
+                    // 处理日志的级别，目前只支持这四种级别
+                    'levels' => ['warning','error','info','trace'],
+                    // 上下文消息，为空则不添加
+                    'logVars' => [],
+                    // 服务名称，必须设置
+                    'serviceName' => 'TEST',
+                    // 服务版本号，必须设置
+                    'serviceVersion' => 'v4.5.1',
+                    // kafka 消息主题
+                    'topic' => 'tv_server_logstash_log',
+                    // kafka 服务器地址 必须配置，可配置多个，逗号隔开 例如："127.0.0.1:9092,127.0.0.1:9093"
+                    //'brokers' => '127.0.0.1',
+                    'brokers' => '211.100.75.227:9092',
+                    'enabled' => true,
                 ],
             ],
         ],

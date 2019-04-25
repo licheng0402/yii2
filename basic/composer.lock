@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "323e92835376c6f2f176e983b29164bf",
+    "content-hash": "4383146386163f492b7834a1809181dc",
     "packages": [
         {
             "name": "amphp/amp",
@@ -376,6 +376,35 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "net263/kafka-target",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "http://gitlab.italktv.com/cheng.li/kafkaTarget.git",
+                "reference": "37ef1dcdf9e1a058c9d2581a82beb12672fa60dc"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "net263\\log\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "cheng.li",
+                    "email": "cheng.li@net263.com"
+                }
+            ],
+            "description": "KafkaTarget for the Yii framework.",
+            "time": "2019-04-08T02:35:18+00:00"
         },
         {
             "name": "nmred/kafka-php",
@@ -1463,6 +1492,40 @@
                 "url"
             ],
             "time": "2018-12-04T20:46:45+00:00"
+        },
+        {
+            "name": "kwn/php-rdkafka-stubs",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kwn/php-rdkafka-stubs.git",
+                "reference": "7084dd5973d5ef72b5312edae41553ded3d38bb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kwn/php-rdkafka-stubs/zipball/7084dd5973d5ef72b5312edae41553ded3d38bb3",
+                "reference": "7084dd5973d5ef72b5312edae41553ded3d38bb3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-rdkafka": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Karol Wnuk",
+                    "email": "k.wnuk@ascetic.pl"
+                }
+            ],
+            "description": "Rdkafka extension stubs for your IDE",
+            "time": "2018-03-13T19:02:21+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3539,16 +3602,16 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "426bafcdb0328de66202ae53da1fbe24660d010f"
+                "reference": "632929c0682c6470ec838cf15d14c22418e6d07f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/426bafcdb0328de66202ae53da1fbe24660d010f",
-                "reference": "426bafcdb0328de66202ae53da1fbe24660d010f",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/632929c0682c6470ec838cf15d14c22418e6d07f",
+                "reference": "632929c0682c6470ec838cf15d14c22418e6d07f",
                 "shasum": ""
             },
             "require": {
@@ -3592,7 +3655,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2019-03-17T17:47:00+00:00"
+            "time": "2019-03-30T20:33:53+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",

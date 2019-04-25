@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Codeception\Extension\Logger;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +62,49 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        Yii::info('test_message','cc');die;
+        echo '<pre>';
+        // 配置 kafka
+        $conf = new \RdKafka\Conf();
+        $conf->setDrMsgCb(function ($kafka, $message) {
+
+            var_dump($kafka,$message,rd_kafka_err2str($message->err));
+        });
+        $conf->setErrorCb(function ($kafka, $err, $reason) {
+            $error = sprintf("Kafka error: %s (reason: %s)", rd_kafka_err2str($err), $reason);
+        });
+        $conf->set('socket.timeout.ms', 3000);
+
+        if (function_exists('pcntl_sigprocmask')) {
+            // 此设置允许 librdkafka 线程在 librdkafka 完成后立即终止。有效地使 PHP 进程/请求快速终止
+            pcntl_sigprocmask(SIG_BLOCK, array(SIGIO));
+            $conf->set('internal.termination.signal', SIGIO);
+        } else {
+            // librdkafka 在发送一批消息之前将等待的最长和默认时间。将此设置减少到例如1ms 可确保尽快发送消息，而不是批处理。可以减少rdkafka 实例和 PHP 进程/请求的关闭时间。
+            $conf->set('queue.buffering.max.ms', 1);
+        }
+
+
+        try{
+            // kafka设置超时时间3s
+            $topicConf = new \RdKafka\TopicConf();
+            $topicConf->set("message.timeout.ms", 60000);
+            $topicConf->set('request.required.acks', 0);
+            // Producer 实例
+            $rk = new \RdKafka\Producer($conf);
+            $rk->addBrokers('127.0.0');
+            $topic = $rk->newTopic('tv_server_logstash_log',$topicConf);
+            $topic->produce(RD_KAFKA_PARTITION_UA, 0, "Message payload");
+        }catch (\Exception $e){
+            //var_dump($e);
+        }
+        while ($len = $rk->getOutQLen() > 0) {
+            $rk->poll(0);
+        }
+
+        die;
+
+
     }
 
     /**
